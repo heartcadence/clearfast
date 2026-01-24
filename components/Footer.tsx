@@ -1,38 +1,35 @@
 import React from 'react';
 import { Phone, Mail, MapPin, Facebook, Instagram, Twitter, Snowflake, Leaf } from 'lucide-react';
 
-const Footer = () => {
+interface FooterProps {
+  isWinter: boolean;
+}
+
+const Footer: React.FC<FooterProps> = ({ isWinter }) => {
+  // Dynamic Background Colors
+  const bgClass = isWinter ? "bg-slate-900" : "bg-green-950";
+  const iconColor = isWinter ? "text-blue-400" : "text-green-400";
+  const hoverColor = isWinter ? "hover:text-blue-300" : "hover:text-green-300";
+
   return (
-    <footer className="relative bg-slate-900 text-white py-12 font-sans border-t border-gray-800 overflow-hidden">
+    <footer className={`relative text-white py-12 font-sans border-t border-gray-800 overflow-hidden transition-colors duration-700 ${bgClass}`}>
       
-      {/* --- BACKGROUND DECORATION (The "Embedded" Images) --- */}
-      {/* Winter Side (Left) */}
-      <div className="absolute top-0 left-0 w-full md:w-1/2 h-full overflow-hidden pointer-events-none">
-        <Snowflake 
-          className="absolute -top-10 -left-10 text-blue-900 opacity-10 transform -rotate-12" 
-          size={400} 
-          strokeWidth={0.5} 
-        />
-        <Snowflake 
-          className="absolute bottom-10 left-20 text-blue-500 opacity-5" 
-          size={100} 
-        />
+      {/* --- BACKGROUND DECORATION --- */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        {isWinter ? (
+          <>
+            <Snowflake className="absolute -top-10 -left-10 text-blue-900 opacity-10 transform -rotate-12" size={400} strokeWidth={0.5} />
+            <Snowflake className="absolute bottom-10 left-20 text-blue-500 opacity-5" size={100} />
+          </>
+        ) : (
+          <>
+            <Leaf className="absolute -bottom-20 -right-10 text-green-900 opacity-10 transform rotate-45" size={400} strokeWidth={0.5} />
+            <Leaf className="absolute top-10 right-20 text-green-500 opacity-5" size={100} />
+          </>
+        )}
       </div>
 
-      {/* Summer Side (Right) */}
-      <div className="absolute top-0 right-0 w-full md:w-1/2 h-full overflow-hidden pointer-events-none">
-        <Leaf 
-          className="absolute -bottom-20 -right-10 text-green-900 opacity-10 transform rotate-45" 
-          size={400} 
-          strokeWidth={0.5} 
-        />
-        <Leaf 
-          className="absolute top-10 right-20 text-green-500 opacity-5" 
-          size={100} 
-        />
-      </div>
-
-      {/* --- CONTENT (Sits on top of the background) --- */}
+      {/* --- CONTENT --- */}
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
             {/* Column 1: Brand */}
@@ -55,15 +52,15 @@ const Footer = () => {
               <h3 className="font-display font-bold text-xl uppercase mb-6 tracking-wide text-gray-100">Contact</h3>
               <ul className="space-y-4 text-gray-300">
                 <li className="flex items-start">
-                  <Phone className="mr-3 h-5 w-5 text-gray-400" />
+                  <Phone className="mr-3 h-5 w-5 ${iconColor}" />
                   <span>(555) 123-4567</span>
                 </li>
                 <li className="flex items-start">
-                  <Mail className="mr-3 h-5 w-5 text-gray-400" />
+                  <Mail className="mr-3 h-5 w-5 ${iconColor}" />
                   <span>hello@clearfast.ca</span>
                 </li>
                 <li className="flex items-start">
-                  <MapPin className="mr-3 h-5 w-5 text-gray-400" />
+                  <MapPin className="mr-3 h-5 w-5 ${iconColor}" />
                   <span>Brantford, ON<br />Serving Brant & Hamilton</span>
                 </li>
               </ul>
@@ -73,12 +70,12 @@ const Footer = () => {
             <div>
                <h3 className="font-display font-bold text-xl uppercase mb-6 tracking-wide text-gray-100">Services</h3>
                <ul className="space-y-3 text-gray-300">
-                 <li><a href="#services" className="hover:text-white transition-colors">Snow Plowing</a></li>
-                 <li><a href="#services" className="hover:text-white transition-colors">Salting & De-icing</a></li>
-                 <li><a href="#services" className="hover:text-white transition-colors">Lawn Mowing</a></li>
-                 <li><a href="#services" className="hover:text-white transition-colors">Fertilization</a></li>
-                 <li><a href="#services" className="hover:text-white transition-colors">Spring Cleanup</a></li>
-                 <li><a href="#services" className="hover:text-white transition-colors">Aeration</a></li>
+                 <li><a href="#services" className="${hoverColor} transition-colors">Snow Plowing</a></li>
+                 <li><a href="#services" className="${hoverColor} transition-colors">Salting & De-icing</a></li>
+                 <li><a href="#services" className="${hoverColor} transition-colors">Lawn Mowing</a></li>
+                 <li><a href="#services" className="${hoverColor} transition-colors">Fertilization</a></li>
+                 <li><a href="#services" className="${hoverColor} transition-colors">Spring Cleanup</a></li>
+                 <li><a href="#services" className="${hoverColor} transition-colors">Aeration</a></li>
                </ul>
             </div>
 
