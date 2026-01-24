@@ -1,14 +1,45 @@
 import React from 'react';
-import { Phone, Mail, MapPin, Facebook, Instagram, Twitter } from 'lucide-react';
+import { Phone, Mail, MapPin, Facebook, Instagram, Twitter, Snowflake, Leaf } from 'lucide-react';
 
 const Footer = () => {
   return (
-    <footer className="bg-slate-900 text-white py-12 font-sans border-t border-gray-800">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <footer className="relative bg-slate-900 text-white py-12 font-sans border-t border-gray-800 overflow-hidden">
+      
+      {/* --- BACKGROUND DECORATION (The "Embedded" Images) --- */}
+      {/* Winter Side (Left) */}
+      <div className="absolute top-0 left-0 w-full md:w-1/2 h-full overflow-hidden pointer-events-none">
+        <Snowflake 
+          className="absolute -top-10 -left-10 text-blue-900 opacity-10 transform -rotate-12" 
+          size={400} 
+          strokeWidth={0.5} 
+        />
+        <Snowflake 
+          className="absolute bottom-10 left-20 text-blue-500 opacity-5" 
+          size={100} 
+        />
+      </div>
+
+      {/* Summer Side (Right) */}
+      <div className="absolute top-0 right-0 w-full md:w-1/2 h-full overflow-hidden pointer-events-none">
+        <Leaf 
+          className="absolute -bottom-20 -right-10 text-green-900 opacity-10 transform rotate-45" 
+          size={400} 
+          strokeWidth={0.5} 
+        />
+        <Leaf 
+          className="absolute top-10 right-20 text-green-500 opacity-5" 
+          size={100} 
+        />
+      </div>
+
+      {/* --- CONTENT (Sits on top of the background) --- */}
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
             {/* Column 1: Brand */}
             <div>
-              <h3 className="font-display font-bold text-xl uppercase mb-6 tracking-wide text-gray-100">Property Care</h3>
+              <h3 className="font-display font-bold text-xl uppercase mb-6 tracking-wide text-gray-100 flex items-center gap-2">
+                Property Care
+              </h3>
               <p className="text-gray-400 mb-6 leading-relaxed">
                 Reliable Twin-Season Property Care. We handle the toughest winter storms and the hottest summer days so you don't have to.
               </p>
