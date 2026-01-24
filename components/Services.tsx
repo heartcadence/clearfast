@@ -27,7 +27,7 @@ const Services: React.FC<ServicesProps> = ({ isWinter, content }) => {
             <div 
               key={index} 
               className={`
-                bg-white p-8 border-t-8 shadow-xl hover:-translate-y-2 transition-transform duration-300
+                h-full flex flex-col min-h-[22rem] bg-white p-8 border-t-8 shadow-xl hover:-translate-y-2 transition-transform duration-300
                 ${cardBorder}
               `}
             >
@@ -37,7 +37,7 @@ const Services: React.FC<ServicesProps> = ({ isWinter, content }) => {
               <h3 className="font-display text-xl font-bold uppercase text-gray-900 mb-3 tracking-wide">
                 {service.title}
               </h3>
-              <p className="font-sans text-gray-600">
+              <p className="font-sans text-gray-600 flex-grow min-h-[5rem]">
                 {service.description}
               </p>
             </div>
