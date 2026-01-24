@@ -51,7 +51,9 @@ const ContactForm: React.FC<ContactFormProps> = ({ isWinter, content }) => {
           <form onSubmit={handleSubmit} className="space-y-6">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
-                <label htmlFor="name" className={labelClass}>Name</label>
+                <label htmlFor="name" className={labelClass}>
+                  Name <span className="text-red-600">*</span>
+                </label>
                 <input
                   type="text"
                   id="name"
@@ -64,7 +66,9 @@ const ContactForm: React.FC<ContactFormProps> = ({ isWinter, content }) => {
                 />
               </div>
               <div>
-                <label htmlFor="phone" className={labelClass}>Phone</label>
+                <label htmlFor="phone" className={labelClass}>
+                  Phone <span className="text-red-600">*</span>
+                </label>
                 <input
                   type="tel"
                   id="phone"
@@ -79,7 +83,9 @@ const ContactForm: React.FC<ContactFormProps> = ({ isWinter, content }) => {
             </div>
 
             <div>
-              <label htmlFor="email" className={labelClass}>Email</label>
+              <label htmlFor="email" className={labelClass}>
+                Email <span className="text-red-600">*</span>
+              </label>
               <input
                 type="email"
                 id="email"
@@ -93,7 +99,9 @@ const ContactForm: React.FC<ContactFormProps> = ({ isWinter, content }) => {
             </div>
 
             <div>
-              <label htmlFor="address" className={labelClass}>Property Address</label>
+              <label htmlFor="address" className={labelClass}>
+                Property Address <span className="text-red-600">*</span>
+              </label>
               <input
                 type="text"
                 id="address"
