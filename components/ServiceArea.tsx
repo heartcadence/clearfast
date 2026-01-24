@@ -9,13 +9,14 @@ const ServiceArea: React.FC<ServiceAreaProps> = ({ isWinter }) => {
   const accentColor = isWinter ? 'text-winter-primary' : 'text-summer-primary';
 
   const locations = [
-    "Brantford (North End)",
-    "Brantford (Holmedale)",
-    "Brantford (West Brant)",
-    "Paris",
+    "Brantford",
+    "Brant",
+    "Kitchener",
+    "Cambridge",
+    "Hamilton",
+    "London",
     "St. George",
-    "Mount Pleasant",
-    "Cainsville"
+    "Paris"
   ];
 
   return (

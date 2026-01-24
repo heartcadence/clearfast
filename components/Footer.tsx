@@ -105,11 +105,12 @@ const Footer: React.FC<FooterProps> = ({ isWinter }) => {
             <ul className="space-y-3 font-sans text-gray-300">
               <li>Brantford</li>
               <li>Brant</li>
-              <li>Paris</li>
-              <li>Newport</li>
-              <li>Ohsweken</li>
+              <li>Kitchener</li>
+              <li>Cambridge</li>
+              <li>Hamilton</li>
+              <li>London</li>
               <li>St. George</li>
-              <li>Mt Vernon</li>
+              <li>Paris</li>
             </ul>
           </div>
         </div>
