@@ -14,17 +14,25 @@ const Footer: React.FC<FooterProps> = ({ isWinter }) => {
   return (
     <footer className={`relative text-white py-12 font-sans border-t border-gray-800 overflow-hidden transition-colors duration-700 ${bgClass}`}>
       
-      {/* --- BACKGROUND DECORATION --- */}
+      {/* --- BACKGROUND DECORATION (Spread across full width) --- */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         {isWinter ? (
+          // Winter Pattern scattered across full width
           <>
-            <Snowflake className="absolute -top-10 -left-10 text-blue-900 opacity-10 transform -rotate-12" size={400} strokeWidth={0.5} />
-            <Snowflake className="absolute bottom-10 left-20 text-blue-500 opacity-5" size={100} />
+            <Snowflake className="absolute -top-20 -left-20 text-blue-900 opacity-10 transform -rotate-12" size={300} strokeWidth={0.5} />
+            <Snowflake className="absolute top-1/4 left-1/3 text-blue-500 opacity-5 transform rotate-45" size={120} strokeWidth={0.5} />
+            <Snowflake className="absolute bottom-10 left-10 text-blue-500 opacity-5" size={80} />
+            <Snowflake className="absolute -top-10 right-20 text-blue-900 opacity-5 transform rotate-12" size={150} strokeWidth={0.5} />
+            <Snowflake className="absolute -bottom-20 -right-20 text-blue-900 opacity-10 transform -rotate-12" size={300} strokeWidth={0.5} />
           </>
         ) : (
+          // Summer Pattern scattered across full width
           <>
-            <Leaf className="absolute -bottom-20 -right-10 text-green-900 opacity-10 transform rotate-45" size={400} strokeWidth={0.5} />
-            <Leaf className="absolute top-10 right-20 text-green-500 opacity-5" size={100} />
+             <Leaf className="absolute -top-20 -left-20 text-green-900 opacity-10 transform rotate-45" size={300} strokeWidth={0.5} />
+             <Leaf className="absolute top-1/4 left-1/3 text-green-500 opacity-5 transform -rotate-12" size={120} strokeWidth={0.5} />
+             <Leaf className="absolute bottom-10 left-10 text-green-500 opacity-5" size={80} />
+             <Leaf className="absolute -top-10 right-20 text-green-900 opacity-5 transform -rotate-45" size={150} strokeWidth={0.5} />
+             <Leaf className="absolute -bottom-20 -right-20 text-green-900 opacity-10 transform rotate-12" size={300} strokeWidth={0.5} />
           </>
         )}
       </div>
