@@ -29,8 +29,8 @@ const About: React.FC<AboutProps> = ({ isWinter }) => {
           <div className="relative">
              <div className={`absolute top-4 left-4 w-full h-full border-4 ${borderColor} opacity-50 transition-colors duration-500`}></div>
              <img 
-               src="https://picsum.photos/id/401/800/600" 
-               alt="Team working" 
+               src="https://pub-ec491af4f6d04940bae264a3cd30d793.r2.dev/about-us.webp" 
+               alt="ClearFast Property Care Team in Brantford and Hamilton" 
                className="relative z-10 w-full h-auto shadow-2xl filter grayscale hover:grayscale-0 transition-all duration-500"
              />
           </div>
