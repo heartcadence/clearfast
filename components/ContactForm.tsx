@@ -14,6 +14,7 @@ const ContactForm: React.FC<ContactFormProps> = ({ isWinter, content }) => {
     email: '',
     serviceNeeded: isWinter ? 'Snow Removal' : 'Lawn Care',
     propertyType: 'Residential',
+    paymentPreference: 'One-Time Service',
     message: ''
   });
 
@@ -23,7 +24,7 @@ const ContactForm: React.FC<ContactFormProps> = ({ isWinter, content }) => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    alert(`Thank you, ${formData.name}! We will quote your ${formData.propertyType} property at ${formData.address} for ${formData.serviceNeeded}.`);
+    alert(`Thank you, ${formData.name}! We will quote your ${formData.propertyType} property at ${formData.address} for ${formData.serviceNeeded} (${formData.paymentPreference}).`);
   };
 
   // Unified Orange CTA
@@ -106,7 +107,7 @@ const ContactForm: React.FC<ContactFormProps> = ({ isWinter, content }) => {
               <p className="text-xs text-gray-400 mt-1">*Crucial for accurate remote quoting</p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               <div>
                 <label htmlFor="serviceNeeded" className={labelClass}>Service Needed</label>
                 <div className="relative">
@@ -123,6 +124,24 @@ const ContactForm: React.FC<ContactFormProps> = ({ isWinter, content }) => {
                   </select>
                 </div>
               </div>
+
+              <div>
+                <label htmlFor="paymentPreference" className={labelClass}>Payment Preference</label>
+                <div className="relative">
+                  <select
+                    id="paymentPreference"
+                    name="paymentPreference"
+                    value={formData.paymentPreference}
+                    onChange={handleChange}
+                    className={inputClass}
+                  >
+                    <option value="One-Time Service">One-Time Service</option>
+                    <option value="Monthly">Monthly</option>
+                    <option value="Full Season">Full Season</option>
+                  </select>
+                </div>
+              </div>
+
               <div>
                 <label htmlFor="propertyType" className={labelClass}>Property Type</label>
                 <div className="relative">
