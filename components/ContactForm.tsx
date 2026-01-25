@@ -8,10 +8,11 @@ interface ContactFormProps {
 
 const ContactForm: React.FC<ContactFormProps> = ({ isWinter, content }) => {
   // ---------------------------------------------------------
-  // OPTION A: ENHANCED SILENT MODE
-  // Adds _replyto to improve deliverability and spam filtering.
+  // HIGH-DELIVERABILITY SILENT MODE
+  // Uses Primary + CC + ReplyTo for maximum spam-bypass
   // ---------------------------------------------------------
-  const targetEmail = "info@heartcadence.com,clearfastsales@gmail.com";
+  const primaryEmail = "info@heartcadence.com";
+  const ccEmail = "clearfastsales@gmail.com";
 
   const [formData, setFormData] = useState({
     name: '',
@@ -35,7 +36,7 @@ const ContactForm: React.FC<ContactFormProps> = ({ isWinter, content }) => {
     setStatus('submitting');
 
     try {
-      const response = await fetch("https://formsubmit.co/ajax/" + targetEmail, {
+      const response = await fetch("https://formsubmit.co/ajax/" + primaryEmail, {
         method: "POST",
         headers: { 
           "Content-Type": "application/json",
@@ -45,8 +46,8 @@ const ContactForm: React.FC<ContactFormProps> = ({ isWinter, content }) => {
           _subject: "New Quote Request - ClearFast Website",
           _template: "table",
           _captcha: "false",
-          // OPTION A TWEAK: Set _replyto to the customer's email
-          _replyto: formData.email,
+          _cc: ccEmail, // Sends a carbon copy to the second email
+          _replyto: formData.email, // Improves spam score
           ...formData,
         }),
       });
@@ -107,150 +108,62 @@ const ContactForm: React.FC<ContactFormProps> = ({ isWinter, content }) => {
             <form onSubmit={handleSubmit} className="space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
-                  <label htmlFor="name" className={labelClass}>
-                    Name <span className="text-red-600">*</span>
-                  </label>
-                  <input
-                    type="text"
-                    id="name"
-                    name="name"
-                    required
-                    value={formData.name}
-                    onChange={handleChange}
-                    className={inputClass}
-                    placeholder="John Doe"
-                  />
+                  <label htmlFor="name" className={labelClass}>Name <span className="text-red-600">*</span></label>
+                  <input type="text" id="name" name="name" required value={formData.name} onChange={handleChange} className={inputClass} placeholder="John Doe" />
                 </div>
                 <div>
-                  <label htmlFor="phone" className={labelClass}>
-                    Phone <span className="text-red-600">*</span>
-                  </label>
-                  <input
-                    type="tel"
-                    id="phone"
-                    name="phone"
-                    required
-                    value={formData.phone}
-                    onChange={handleChange}
-                    className={inputClass}
-                    placeholder="(555) 555-0123"
-                  />
+                  <label htmlFor="phone" className={labelClass}>Phone <span className="text-red-600">*</span></label>
+                  <input type="tel" id="phone" name="phone" required value={formData.phone} onChange={handleChange} className={inputClass} placeholder="(555) 555-0123" />
                 </div>
               </div>
 
               <div>
-                <label htmlFor="email" className={labelClass}>
-                  Email <span className="text-red-600">*</span>
-                </label>
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  required
-                  value={formData.email}
-                  onChange={handleChange}
-                  className={inputClass}
-                  placeholder="john@example.com"
-                />
+                <label htmlFor="email" className={labelClass}>Email <span className="text-red-600">*</span></label>
+                <input type="email" id="email" name="email" required value={formData.email} onChange={handleChange} className={inputClass} placeholder="john@example.com" />
               </div>
 
               <div>
-                <label htmlFor="address" className={labelClass}>
-                  Property Address
-                </label>
-                <input
-                  type="text"
-                  id="address"
-                  name="address"
-                  value={formData.address}
-                  onChange={handleChange}
-                  className={inputClass}
-                  placeholder="123 Main St, Your City, ST"
-                />
+                <label htmlFor="address" className={labelClass}>Property Address</label>
+                <input type="text" id="address" name="address" value={formData.address} onChange={handleChange} className={inputClass} placeholder="123 Main St, Your City, ST" />
                 <p className="text-xs text-gray-400 mt-1">Crucial for accurate remote quoting</p>
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <div>
                   <label htmlFor="serviceNeeded" className={labelClass}>Service Needed</label>
-                  <div className="relative">
-                    <select
-                      id="serviceNeeded"
-                      name="serviceNeeded"
-                      value={formData.serviceNeeded}
-                      onChange={handleChange}
-                      className={inputClass}
-                    >
-                      <option value="Snow Removal">Snow Removal</option>
-                      <option value="Lawn Care">Lawn Care</option>
-                      <option value="Year-Round">Both (Year-Round)</option>
-                    </select>
-                  </div>
+                  <select id="serviceNeeded" name="serviceNeeded" value={formData.serviceNeeded} onChange={handleChange} className={inputClass}>
+                    <option value="Snow Removal">Snow Removal</option>
+                    <option value="Lawn Care">Lawn Care</option>
+                    <option value="Year-Round">Both (Year-Round)</option>
+                  </select>
                 </div>
-
                 <div>
                   <label htmlFor="paymentPreference" className={labelClass}>Payment Preference</label>
-                  <div className="relative">
-                    <select
-                      id="paymentPreference"
-                      name="paymentPreference"
-                      value={formData.paymentPreference}
-                      onChange={handleChange}
-                      className={inputClass}
-                    >
-                      <option value="One-Time Service">One-Time Service</option>
-                      <option value="Monthly">Monthly</option>
-                      <option value="Full Season">Full Season</option>
-                    </select>
-                  </div>
+                  <select id="paymentPreference" name="paymentPreference" value={formData.paymentPreference} onChange={handleChange} className={inputClass}>
+                    <option value="One-Time Service">One-Time Service</option>
+                    <option value="Monthly">Monthly</option>
+                    <option value="Full Season">Full Season</option>
+                  </select>
                 </div>
-
                 <div>
                   <label htmlFor="propertyType" className={labelClass}>Property Type</label>
-                  <div className="relative">
-                    <select
-                      id="propertyType"
-                      name="propertyType"
-                      value={formData.propertyType}
-                      onChange={handleChange}
-                      className={inputClass}
-                    >
-                      <option value="Residential">Residential</option>
-                      <option value="Commercial">Commercial</option>
-                    </select>
-                  </div>
+                  <select id="propertyType" name="propertyType" value={formData.propertyType} onChange={handleChange} className={inputClass}>
+                    <option value="Residential">Residential</option>
+                    <option value="Commercial">Commercial</option>
+                  </select>
                 </div>
               </div>
 
               <div>
                 <label htmlFor="message" className={labelClass}>Notes</label>
-                <textarea
-                  id="message"
-                  name="message"
-                  rows={4}
-                  value={formData.message}
-                  onChange={handleChange}
-                  className={inputClass}
-                  placeholder="Gate codes, specific hazards, or questions..."
-                ></textarea>
+                <textarea id="message" name="message" rows={4} value={formData.message} onChange={handleChange} className={inputClass} placeholder="Gate codes, specific hazards, or questions..."></textarea>
               </div>
 
-              <button
-                type="submit"
-                disabled={status === 'submitting'}
-                className={`w-full py-5 px-6 font-display font-bold uppercase text-xl tracking-wider transition-colors duration-300 rounded-sm shadow-md ${btnClass} ${status === 'submitting' ? 'opacity-70 cursor-wait' : ''}`}
-              >
+              <button type="submit" disabled={status === 'submitting'} className={`w-full py-5 px-6 font-display font-bold uppercase text-xl tracking-wider transition-colors duration-300 rounded-sm shadow-md ${btnClass} ${status === 'submitting' ? 'opacity-70 cursor-wait' : ''}`}>
                 {status === 'submitting' ? 'Sending...' : 'Get My Free Quote'}
               </button>
-              
-              {status === 'error' && (
-                <p className="text-red-600 text-center font-bold">
-                  Something went wrong. Please try again.
-                </p>
-              )}
             </form>
           )}
-
         </div>
       </div>
     </section>
