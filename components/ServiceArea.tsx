@@ -58,7 +58,7 @@ const ServiceArea: React.FC<ServiceAreaProps> = ({ isWinter }) => {
               Go to My Maps, draw your polygon, screenshot it, and upload.
             */}
             <img 
-              src="https://pub-ec491af4f6d04940bae264a3cd30d793.r2.dev/brantford-service-map.webp" 
+              src="/images/brantford-service-map.webp" 
               alt="Map of ClearFast Service Area in Brantford" 
               className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
             />

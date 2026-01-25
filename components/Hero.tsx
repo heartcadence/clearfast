@@ -9,8 +9,8 @@ interface HeroProps {
 const Hero: React.FC<HeroProps> = ({ isWinter, content }) => {
   // Static Image Logic
   // Using two separate elements for cross-fade transition
-  const winterImage = 'https://pub-ec491af4f6d04940bae264a3cd30d793.r2.dev/hero-winter.webp';
-  const summerImage = 'https://pub-ec491af4f6d04940bae264a3cd30d793.r2.dev/hero-summer.webp';
+  const winterImage = '/images/hero-winter.webp';
+  const summerImage = '/images/hero-summer.webp';
 
   // Dark semi-transparent overlay as requested (bg-black/50) to make white text pop
   const overlayColor = 'bg-black/50';

@@ -1,3 +1,5 @@
+import "@fontsource/inter";
+import "@fontsource/montserrat";
 import React, { useState, Suspense, lazy } from 'react';
 import Navbar from '../components/Navbar';
 import Hero from '../components/Hero';
