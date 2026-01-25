@@ -32,7 +32,7 @@ const Contact: React.FC<ContactProps> = ({ isWinter, content }) => {
       // Using FormSubmit.co AJAX endpoint (No API Key required)
       const response = await fetch(`https://formsubmit.co/ajax/${targetEmail}`, {
         method: "POST",
-        headers: { 
+        headers: {
           "Content-Type": "application/json",
           "Accept": "application/json"
         },
@@ -62,15 +62,15 @@ const Contact: React.FC<ContactProps> = ({ isWinter, content }) => {
     }));
   };
 
-  const buttonColor = isWinter 
-    ? 'bg-orange-600 hover:bg-orange-700 shadow-orange-900/20' 
+  const buttonColor = isWinter
+    ? 'bg-orange-600 hover:bg-orange-700 shadow-orange-900/20'
     : 'bg-green-600 hover:bg-green-700 shadow-green-900/20';
 
   return (
     <section id="contact" className="py-24 bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
-          
+
           {/* Contact Info Side */}
           <div>
             <h2 className="font-display font-bold text-4xl text-gray-900 uppercase tracking-tight mb-6">
@@ -124,7 +124,7 @@ const Contact: React.FC<ContactProps> = ({ isWinter, content }) => {
                 <p className="text-gray-600 mb-8">
                   Thanks for contacting ClearFast. We will review your property and email you a quote shortly.
                 </p>
-                <button 
+                <button
                   onClick={() => setStatus('idle')}
                   className="text-gray-500 hover:text-gray-900 font-medium underline"
                 >
@@ -135,7 +135,9 @@ const Contact: React.FC<ContactProps> = ({ isWinter, content }) => {
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                   <div>
-                    <label className="block text-sm font-bold text-gray-700 mb-2 uppercase tracking-wide">Name</label>
+                    <label className="block text-sm font-bold text-gray-700 mb-2 uppercase tracking-wide">
+                      Name <span className="text-red-500">*</span>
+                    </label>
                     <input
                       type="text"
                       name="name"
@@ -147,7 +149,9 @@ const Contact: React.FC<ContactProps> = ({ isWinter, content }) => {
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-bold text-gray-700 mb-2 uppercase tracking-wide">Phone</label>
+                    <label className="block text-sm font-bold text-gray-700 mb-2 uppercase tracking-wide">
+                      Phone <span className="text-red-500">*</span>
+                    </label>
                     <input
                       type="tel"
                       name="phone"
@@ -161,7 +165,9 @@ const Contact: React.FC<ContactProps> = ({ isWinter, content }) => {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-bold text-gray-700 mb-2 uppercase tracking-wide">Email</label>
+                  <label className="block text-sm font-bold text-gray-700 mb-2 uppercase tracking-wide">
+                    Email <span className="text-red-500">*</span>
+                  </label>
                   <input
                     type="email"
                     name="email"
@@ -173,7 +179,7 @@ const Contact: React.FC<ContactProps> = ({ isWinter, content }) => {
                   />
                 </div>
 
-                {/* Updated Address Field: No asterisk, no required tag */}
+                {/* Updated Address Field: Asterisk removed */}
                 <div>
                   <label className="block text-sm font-bold text-gray-700 mb-2 uppercase tracking-wide">
                     Property Address
@@ -216,7 +222,7 @@ const Contact: React.FC<ContactProps> = ({ isWinter, content }) => {
                     </>
                   )}
                 </button>
-                
+
                 {status === 'error' && (
                   <p className="text-red-600 text-center text-sm font-bold mt-2">
                     Something went wrong. Please try again or call us directly.
