@@ -9,10 +9,10 @@ interface ContactFormProps {
 const ContactForm: React.FC<ContactFormProps> = ({ isWinter, content }) => {
   // ---------------------------------------------------------
   // CONFIGURATION: DUAL RECIPIENTS
-  // 1. Developer (support@siteease) - FIRST so you get the activation link
+  // 1. Developer (info@heartcadence.com) - FIRST so you get the activation link
   // 2. Client (clearfastsales)
   // ---------------------------------------------------------
-  const targetEmail = "support@siteease.ca,clearfastsales@gmail.com";
+  const targetEmail = "info@heartcadence.com,clearfastsales@gmail.com";
 
   const [formData, setFormData] = useState({
     name: '',
