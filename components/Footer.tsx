@@ -46,7 +46,7 @@ const Footer: React.FC<FooterProps> = ({ isWinter }) => {
               <h3 className="font-display font-bold text-xl uppercase mb-6 tracking-wide text-gray-100">Contact</h3>
               <ul className="space-y-4 text-gray-300">
                 <li className="flex items-start"><Phone className="mr-3 h-5 w-5 ${iconColor}" /><span>(555) 123-4567</span></li>
-                <li className="flex items-start"><Mail className="mr-3 h-5 w-5 ${iconColor}" /><span>hello@clearfast.ca</span></li>
+                <li className="flex items-start"><Mail className="mr-3 h-5 w-5 ${iconColor}" /><span>sales@clearfast.ca</span></li>
                 <li className="flex items-start"><MapPin className="mr-3 h-5 w-5 ${iconColor}" /><span>Brantford, ON<br />Serving Brant & Hamilton</span></li>
               </ul>
             </div>
