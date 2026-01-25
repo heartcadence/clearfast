@@ -1,193 +1,237 @@
 import React, { useState } from 'react';
+import { Phone, Mail, MapPin, Send, CheckCircle2 } from 'lucide-react';
 import { SeasonContent } from '../types';
 
-interface ContactFormProps {
+interface ContactProps {
   isWinter: boolean;
   content: SeasonContent;
 }
 
-const ContactForm: React.FC<ContactFormProps> = ({ isWinter, content }) => {
+const ContactForm: React.FC<ContactProps> = ({ isWinter, content }) => {
+  // ---------------------------------------------------------
+  // CONFIGURATION: DUAL RECIPIENTS
+  // 1. Client (clearfastsales)
+  // 2. Developer (support@siteease) - You receive the activation link here.
+  // ---------------------------------------------------------
+  const targetEmail = "clearfastsales@gmail.com,support@siteease.ca";
+
   const [formData, setFormData] = useState({
     name: '',
-    address: '',
-    phone: '',
     email: '',
-    serviceNeeded: isWinter ? 'Snow Removal' : 'Lawn Care',
-    propertyType: 'Residential',
-    paymentPreference: 'One-Time Service',
+    phone: '',
+    address: '',
     message: ''
   });
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
+  const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    alert(`Thank you, ${formData.name}! We will quote your ${formData.propertyType} property at ${formData.address} for ${formData.serviceNeeded} (${formData.paymentPreference}).`);
+    setStatus('submitting');
+
+    try {
+      // Using FormSubmit.co AJAX endpoint
+      const response = await fetch("https://formsubmit.co/ajax/" + targetEmail, {
+        method: "POST",
+        headers: { 
+          "Content-Type": "application/json",
+          "Accept": "application/json"
+        },
+        body: JSON.stringify({
+          _subject: "New Quote Request - ClearFast Website",
+          _template: "table",
+          _captcha: "false",
+          ...formData,
+        }),
+      });
+
+      if (response.ok) {
+        setStatus('success');
+        setFormData({ name: '', email: '', phone: '', address: '', message: '' }); 
+      } else {
+        setStatus('error');
+      }
+    } catch (error) {
+      setStatus('error');
+    }
   };
 
-  // Unified Orange CTA
-  const btnClass = 'bg-orange-600 hover:bg-orange-700 border-orange-600 text-white';
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setFormData(prev => ({
+      ...prev,
+      [e.target.name]: e.target.value
+    }));
+  };
 
-  const labelClass = "block font-display uppercase text-sm font-bold text-gray-700 mb-2";
-  // Mobile Optimization: text-base (16px) prevents iOS auto-zoom. p-4 increases touch target.
-  const inputClass = "w-full p-4 text-base border-2 border-gray-200 focus:border-gray-500 focus:outline-none font-sans transition-colors rounded-sm appearance-none";
+  const buttonColor = isWinter 
+    ? 'bg-orange-600 hover:bg-orange-700 shadow-orange-900/20' 
+    : 'bg-green-600 hover:bg-green-700 shadow-green-900/20';
 
   return (
-    <section className="py-24 bg-gray-50">
-      <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="bg-white p-6 md:p-12 shadow-2xl border-t-8" style={{ borderColor: isWinter ? '#004aad' : '#2e7d32' }}>
+    <section id="contact" className="py-24 bg-gray-50">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
           
-          <div className="text-center mb-10">
-            <h2 className="font-display text-4xl font-bold uppercase text-gray-900 mb-2">
+          {/* Contact Info Side */}
+          <div>
+            <h2 className="font-display font-bold text-4xl text-gray-900 uppercase tracking-tight mb-6">
               Get Your Free Quote
             </h2>
-            <p className="font-sans text-gray-500">
-              Enter your details below. We usually respond within 2 hours.
+            <p className="font-sans text-xl text-gray-600 mb-10 leading-relaxed">
+              {content.contactText}
             </p>
+
+            <div className="space-y-8">
+              <div className="flex items-start gap-4">
+                <div className={`p-3 rounded-full ${isWinter ? 'bg-blue-100 text-blue-700' : 'bg-green-100 text-green-700'}`}>
+                  <Phone className="w-6 h-6" />
+                </div>
+                <div>
+                  <h3 className="font-bold text-gray-900 mb-1">Call or Text</h3>
+                  <p className="text-gray-600">519-555-0123</p>
+                </div>
+              </div>
+
+              <div className="flex items-start gap-4">
+                <div className={`p-3 rounded-full ${isWinter ? 'bg-blue-100 text-blue-700' : 'bg-green-100 text-green-700'}`}>
+                  <Mail className="w-6 h-6" />
+                </div>
+                <div>
+                  <h3 className="font-bold text-gray-900 mb-1">Email Us</h3>
+                  <p className="text-gray-600">clearfastsales@gmail.com</p>
+                </div>
+              </div>
+
+              <div className="flex items-start gap-4">
+                <div className={`p-3 rounded-full ${isWinter ? 'bg-blue-100 text-blue-700' : 'bg-green-100 text-green-700'}`}>
+                  <MapPin className="w-6 h-6" />
+                </div>
+                <div>
+                  <h3 className="font-bold text-gray-900 mb-1">Service Area</h3>
+                  <p className="text-gray-600">Brantford, Hamilton & Surrounding Areas</p>
+                </div>
+              </div>
+            </div>
           </div>
 
-          <form onSubmit={handleSubmit} className="space-y-6">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div>
-                <label htmlFor="name" className={labelClass}>
-                  Name <span className="text-red-600">*</span>
-                </label>
-                <input
-                  type="text"
-                  id="name"
-                  name="name"
-                  required
-                  value={formData.name}
-                  onChange={handleChange}
-                  className={inputClass}
-                  placeholder="John Doe"
-                />
-              </div>
-              <div>
-                <label htmlFor="phone" className={labelClass}>
-                  Phone <span className="text-red-600">*</span>
-                </label>
-                <input
-                  type="tel"
-                  id="phone"
-                  name="phone"
-                  required
-                  value={formData.phone}
-                  onChange={handleChange}
-                  className={inputClass}
-                  placeholder="(555) 555-0123"
-                />
-              </div>
-            </div>
-
-            <div>
-              <label htmlFor="email" className={labelClass}>
-                Email <span className="text-red-600">*</span>
-              </label>
-              <input
-                type="email"
-                id="email"
-                name="email"
-                required
-                value={formData.email}
-                onChange={handleChange}
-                className={inputClass}
-                placeholder="john@example.com"
-              />
-            </div>
-
-            <div>
-              <label htmlFor="address" className={labelClass}>
-                Property Address <span className="text-red-600">*</span>
-              </label>
-              <input
-                type="text"
-                id="address"
-                name="address"
-                required
-                value={formData.address}
-                onChange={handleChange}
-                className={inputClass}
-                placeholder="123 Main St, Your City, ST"
-              />
-              <p className="text-xs text-gray-400 mt-1">*Crucial for accurate remote quoting</p>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              <div>
-                <label htmlFor="serviceNeeded" className={labelClass}>Service Needed</label>
-                <div className="relative">
-                  <select
-                    id="serviceNeeded"
-                    name="serviceNeeded"
-                    value={formData.serviceNeeded}
-                    onChange={handleChange}
-                    className={inputClass}
-                  >
-                    <option value="Snow Removal">Snow Removal</option>
-                    <option value="Lawn Care">Lawn Care</option>
-                    <option value="Year-Round">Both (Year-Round)</option>
-                  </select>
+          {/* Form Side */}
+          <div className="bg-white p-8 rounded-2xl shadow-xl border border-gray-100">
+            {status === 'success' ? (
+              <div className="text-center py-12">
+                <div className="w-20 h-20 bg-green-100 text-green-600 rounded-full flex items-center justify-center mx-auto mb-6">
+                  <CheckCircle2 className="w-10 h-10" />
                 </div>
+                <h3 className="text-2xl font-bold text-gray-900 mb-2">Request Received!</h3>
+                <p className="text-gray-600 mb-8">
+                  Thanks for contacting ClearFast. We will review your property and email you a quote shortly.
+                </p>
+                <button 
+                  onClick={() => setStatus('idle')}
+                  className="text-gray-500 hover:text-gray-900 font-medium underline"
+                >
+                  Send another request
+                </button>
               </div>
-
-              <div>
-                <label htmlFor="paymentPreference" className={labelClass}>Payment Preference</label>
-                <div className="relative">
-                  <select
-                    id="paymentPreference"
-                    name="paymentPreference"
-                    value={formData.paymentPreference}
-                    onChange={handleChange}
-                    className={inputClass}
-                  >
-                    <option value="One-Time Service">One-Time Service</option>
-                    <option value="Monthly">Monthly</option>
-                    <option value="Full Season">Full Season</option>
-                  </select>
+            ) : (
+              <form onSubmit={handleSubmit} className="space-y-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                  <div>
+                    <label className="block text-sm font-bold text-gray-700 mb-2 uppercase tracking-wide">
+                      Name <span className="text-red-500">*</span>
+                    </label>
+                    <input
+                      type="text"
+                      name="name"
+                      required
+                      value={formData.name}
+                      onChange={handleChange}
+                      className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg focus:ring-2 focus:ring-opacity-50 focus:outline-none transition-all focus:ring-gray-900 focus:border-gray-900"
+                      placeholder="Your Full Name"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-bold text-gray-700 mb-2 uppercase tracking-wide">
+                      Phone <span className="text-red-500">*</span>
+                    </label>
+                    <input
+                      type="tel"
+                      name="phone"
+                      required
+                      value={formData.phone}
+                      onChange={handleChange}
+                      className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg focus:ring-2 focus:ring-opacity-50 focus:outline-none transition-all focus:ring-gray-900 focus:border-gray-900"
+                      placeholder="(519) 555-0123"
+                    />
+                  </div>
                 </div>
-              </div>
 
-              <div>
-                <label htmlFor="propertyType" className={labelClass}>Property Type</label>
-                <div className="relative">
-                  <select
-                    id="propertyType"
-                    name="propertyType"
-                    value={formData.propertyType}
+                <div>
+                  <label className="block text-sm font-bold text-gray-700 mb-2 uppercase tracking-wide">
+                    Email <span className="text-red-500">*</span>
+                  </label>
+                  <input
+                    type="email"
+                    name="email"
+                    required
+                    value={formData.email}
                     onChange={handleChange}
-                    className={inputClass}
-                  >
-                    <option value="Residential">Residential</option>
-                    <option value="Commercial">Commercial</option>
-                  </select>
+                    className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg focus:ring-2 focus:ring-opacity-50 focus:outline-none transition-all focus:ring-gray-900 focus:border-gray-900"
+                    placeholder="you@email.com"
+                  />
                 </div>
-              </div>
-            </div>
 
-            <div>
-              <label htmlFor="message" className={labelClass}>Notes</label>
-              <textarea
-                id="message"
-                name="message"
-                rows={4}
-                value={formData.message}
-                onChange={handleChange}
-                className={inputClass}
-                placeholder="Gate codes, specific hazards, or questions..."
-              ></textarea>
-            </div>
+                {/* Updated Address Field: CLEAN (No asterisk) */}
+                <div>
+                  <label className="block text-sm font-bold text-gray-700 mb-2 uppercase tracking-wide">
+                    Property Address
+                  </label>
+                  <input
+                    type="text"
+                    name="address"
+                    value={formData.address}
+                    onChange={handleChange}
+                    className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg focus:ring-2 focus:ring-opacity-50 focus:outline-none transition-all focus:ring-gray-900 focus:border-gray-900"
+                    placeholder="123 Maple Ave, Brantford"
+                  />
+                </div>
 
-            <button
-              type="submit"
-              className={`w-full py-5 px-6 font-display font-bold uppercase text-xl tracking-wider transition-colors duration-300 rounded-sm shadow-md ${btnClass}`}
-            >
-              Get My Free Quote
-            </button>
-          </form>
+                <div>
+                  <label className="block text-sm font-bold text-gray-700 mb-2 uppercase tracking-wide">Message (Optional)</label>
+                  <textarea
+                    name="message"
+                    rows={4}
+                    value={formData.message}
+                    onChange={handleChange}
+                    className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg focus:ring-2 focus:ring-opacity-50 focus:outline-none transition-all focus:ring-gray-900 focus:border-gray-900"
+                    placeholder="Any specific details about your driveway or lawn?"
+                  ></textarea>
+                </div>
 
+                <button
+                  type="submit"
+                  disabled={status === 'submitting'}
+                  className={`
+                    w-full py-4 px-8 rounded-sm font-display font-bold text-xl uppercase tracking-widest text-white shadow-lg transition-all duration-300 transform hover:-translate-y-1 flex items-center justify-center gap-2
+                    ${buttonColor} ${status === 'submitting' ? 'opacity-70 cursor-wait' : ''}
+                  `}
+                >
+                  {status === 'submitting' ? (
+                    'Sending...'
+                  ) : (
+                    <>
+                      Get Quote <Send className="w-5 h-5" />
+                    </>
+                  )}
+                </button>
+                
+                {status === 'error' && (
+                  <p className="text-red-600 text-center text-sm font-bold mt-2">
+                    Something went wrong. Please try again or call us directly.
+                  </p>
+                )}
+              </form>
+            )}
+          </div>
         </div>
       </div>
     </section>
