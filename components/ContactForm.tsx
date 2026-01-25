@@ -231,7 +231,7 @@ const ContactForm: React.FC<ContactFormProps> = ({ isWinter, content }) => {
               <button
                 type="submit"
                 disabled={status === 'submitting'}
-                className={}
+                className={`w-full py-5 px-6 font-display font-bold uppercase text-xl tracking-wider transition-colors duration-300 rounded-sm shadow-md ${btnClass} ${status === 'submitting' ? 'opacity-70 cursor-wait' : ''}`}
               >
                 {status === 'submitting' ? 'Sending...' : 'Get My Free Quote'}
               </button>
