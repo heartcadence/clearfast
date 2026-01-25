@@ -8,8 +8,8 @@ interface ContactFormProps {
 
 const ContactForm: React.FC<ContactFormProps> = ({ isWinter, content }) => {
   // ---------------------------------------------------------
-  // FINAL CONFIGURATION: SILENT MODE + DUAL EMAILS
-  // Since you activated the first email, this will now work silently for both.
+  // OPTION A: ENHANCED SILENT MODE
+  // Adds _replyto to improve deliverability and spam filtering.
   // ---------------------------------------------------------
   const targetEmail = "info@heartcadence.com,clearfastsales@gmail.com";
 
@@ -35,8 +35,6 @@ const ContactForm: React.FC<ContactFormProps> = ({ isWinter, content }) => {
     setStatus('submitting');
 
     try {
-      // Using FormSubmit.co AJAX endpoint (Silent Mode)
-      // The comma-separated email string works perfectly here.
       const response = await fetch("https://formsubmit.co/ajax/" + targetEmail, {
         method: "POST",
         headers: { 
@@ -47,13 +45,14 @@ const ContactForm: React.FC<ContactFormProps> = ({ isWinter, content }) => {
           _subject: "New Quote Request - ClearFast Website",
           _template: "table",
           _captcha: "false",
+          // OPTION A TWEAK: Set _replyto to the customer's email
+          _replyto: formData.email,
           ...formData,
         }),
       });
 
       if (response.ok) {
         setStatus('success');
-        // Clear form after success
         setFormData({ 
           name: '', 
           address: '', 
@@ -72,7 +71,6 @@ const ContactForm: React.FC<ContactFormProps> = ({ isWinter, content }) => {
     }
   };
 
-  // Unified Orange CTA
   const btnClass = 'bg-orange-600 hover:bg-orange-700 border-orange-600 text-white';
   const labelClass = "block font-display uppercase text-sm font-bold text-gray-700 mb-2";
   const inputClass = "w-full p-4 text-base border-2 border-gray-200 focus:border-gray-500 focus:outline-none font-sans transition-colors rounded-sm appearance-none";
@@ -156,7 +154,6 @@ const ContactForm: React.FC<ContactFormProps> = ({ isWinter, content }) => {
                 />
               </div>
 
-              {/* Optional Address (No Asterisk) */}
               <div>
                 <label htmlFor="address" className={labelClass}>
                   Property Address
