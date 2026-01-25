@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { SeasonContent } from '../types';
 
 interface HeroProps {
@@ -7,35 +7,43 @@ interface HeroProps {
 }
 
 const Hero: React.FC<HeroProps> = ({ isWinter, content }) => {
-  // Static Image Logic
-  // Using two separate elements for cross-fade transition
   const winterImage = '/images/hero-winter.webp';
-  const summerImage = '/images/hero-summer.webp';
-
-  // Dark semi-transparent overlay as requested (bg-black/50) to make white text pop
-  const overlayColor = 'bg-black/50';
   
-  // Unified Button Color: Bright Safety Orange for both seasons for maximum visibility
+  // State to hold the summer image (starts empty to prevent early download)
+  const [summerImage, setSummerImage] = useState<string>('');
+
+  useEffect(() => {
+    // Wait for the browser to finish critical tasks (2.5 seconds), then load Summer image
+    const timer = setTimeout(() => {
+      const img = new Image();
+      img.src = '/images/hero-summer.webp';
+      img.onload = () => setSummerImage('/images/hero-summer.webp');
+    }, 2500);
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  // Dark overlay (bg-black/50)
+  const overlayColor = 'bg-black/50';
   const buttonBg = 'bg-orange-600 hover:bg-orange-700 text-white shadow-orange-900/50';
 
   return (
     <div className="relative h-[600px] flex items-center justify-center overflow-hidden bg-gray-900">
       
-      {/* Summer Background Layer (Base) */}
+      {/* Summer Background (Only renders URL when ready) */}
       <div 
         className={`absolute inset-0 bg-cover bg-center transition-opacity duration-1000 ease-in-out ${!isWinter ? 'opacity-100' : 'opacity-0'}`}
-        style={{ backgroundImage: `url(${summerImage})` }}
+        style={{ backgroundImage: summerImage ? `url(${summerImage})` : undefined }}
         aria-hidden="true"
       ></div>
 
-      {/* Winter Background Layer (Overlay) */}
+      {/* Winter Background (Loads Immediately) */}
       <div 
         className={`absolute inset-0 bg-cover bg-center transition-opacity duration-1000 ease-in-out ${isWinter ? 'opacity-100' : 'opacity-0'}`}
         style={{ backgroundImage: `url(${winterImage})` }}
         aria-hidden="true"
       ></div>
       
-      {/* Dark Overlay for Readability */}
       <div className={`absolute inset-0 ${overlayColor} pointer-events-none`}></div>
 
       {/* Content */}
@@ -44,16 +52,12 @@ const Hero: React.FC<HeroProps> = ({ isWinter, content }) => {
           {content.heroHeadline}
         </h1>
         
-        <p 
-          id="hero-sub"
-          className="font-sans text-xl sm:text-2xl text-gray-100 mb-10 font-light tracking-wide max-w-2xl mx-auto drop-shadow-md"
-        >
+        <p className="font-sans text-xl sm:text-2xl text-gray-100 mb-10 font-light tracking-wide max-w-2xl mx-auto drop-shadow-md">
           {content.heroSubheadline}
         </p>
         
         <a 
           href="#contact"
-          id="hero-cta"
           className={`
             inline-block font-display font-bold text-2xl uppercase tracking-widest 
             py-5 px-12 rounded-sm shadow-xl transition-all duration-300 transform hover:-translate-y-1
@@ -63,8 +67,6 @@ const Hero: React.FC<HeroProps> = ({ isWinter, content }) => {
           {content.ctaText}
         </a>
       </div>
-
-      {/* Seasonal Decorative Element (Optional fade at bottom) */}
       <div className="absolute bottom-0 left-0 w-full h-24 bg-gradient-to-t from-white to-transparent opacity-20 pointer-events-none"></div>
     </div>
   );
