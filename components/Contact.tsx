@@ -173,15 +173,14 @@ const Contact: React.FC<ContactProps> = ({ isWinter, content }) => {
                   />
                 </div>
 
-                {/* Updated Address Field (Optional) */}
+                {/* Updated Address Field: No asterisk, no required tag */}
                 <div>
                   <label className="block text-sm font-bold text-gray-700 mb-2 uppercase tracking-wide">
-                    Property Address <span className="text-gray-400 font-normal normal-case">(Optional)</span>
+                    Property Address
                   </label>
                   <input
                     type="text"
                     name="address"
-                    // REMOVED: required attribute
                     value={formData.address}
                     onChange={handleChange}
                     className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg focus:ring-2 focus:ring-opacity-50 focus:outline-none transition-all focus:ring-gray-900 focus:border-gray-900"
