@@ -37,14 +37,12 @@ const Contact: React.FC<ContactProps> = ({ isWinter, content }) => {
           "Accept": "application/json"
         },
         body: JSON.stringify({
-          _subject: "New Quote Request - ClearFast Website", // Email Subject Line
-          _template: "table", // Makes the email look clean
-          _captcha: "false", // Disable captcha for smoother user experience
+          _subject: "New Quote Request - ClearFast Website",
+          _template: "table",
+          _captcha: "false",
           ...formData,
         }),
       });
-
-      const result = await response.json();
 
       if (response.ok) {
         setStatus('success');
@@ -175,12 +173,14 @@ const Contact: React.FC<ContactProps> = ({ isWinter, content }) => {
                   />
                 </div>
 
+                {/* Updated Address Field: No asterisk, no required tag */}
                 <div>
-                  <label className="block text-sm font-bold text-gray-700 mb-2 uppercase tracking-wide">Property Address</label>
+                  <label className="block text-sm font-bold text-gray-700 mb-2 uppercase tracking-wide">
+                    Property Address
+                  </label>
                   <input
                     type="text"
                     name="address"
-                    required
                     value={formData.address}
                     onChange={handleChange}
                     className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg focus:ring-2 focus:ring-opacity-50 focus:outline-none transition-all focus:ring-gray-900 focus:border-gray-900"
