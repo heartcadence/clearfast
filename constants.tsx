@@ -35,7 +35,7 @@ export const WINTER_CONTENT: SeasonContent = {
 export const SUMMER_CONTENT: SeasonContent = {
   mode: 'summer',
   primaryColor: 'bg-summer-primary',
-  heroHeadline: "CLEARFAST LAWN CARE AND LANDSCAPING",
+  heroHeadline: "CLEARFAST PREMIUM LAWN CARE",
   heroSubheadline: "Reclaim your weekends. Enjoy a manicured lawn without lifting a finger.",
   ctaText: "MOW MY LAWN",
   howItWorksStep3: "Bask in the splendor of your lush, green lawn.",
