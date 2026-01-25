@@ -31,7 +31,7 @@ const About: React.FC<AboutProps> = ({ isWinter }) => {
              <img 
                src="https://pub-ec491af4f6d04940bae264a3cd30d793.r2.dev/about-us.webp" 
                alt="ClearFast Property Care Team in Brantford and Hamilton" 
-               className="relative z-10 w-full h-auto shadow-2xl filter grayscale hover:grayscale-0 transition-all duration-500"
+               className="relative z-10 w-full h-auto shadow-2xl filter  hover:-0 "
              />
           </div>
 
