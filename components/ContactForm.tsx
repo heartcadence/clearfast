@@ -8,12 +8,11 @@ interface ContactFormProps {
 
 const ContactForm: React.FC<ContactFormProps> = ({ isWinter, content }) => {
   // ---------------------------------------------------------
-  // MODE: LOUD (Standard POST)
-  // This forces a redirect to FormSubmit.co to trigger the Activation Screen.
+  // MODE: ACTIVATION (Single Email)
+  // We use ONLY your email here to pass the validator and trigger the activation link.
   // ---------------------------------------------------------
-  const targetEmail = "info@heartcadence.com,clearfastsales@gmail.com";
+  const targetEmail = "info@heartcadence.com";
 
-  // We keep state so the inputs are editable, but we don't handle the submit via JS
   const [formData, setFormData] = useState({
     name: '',
     address: '',
@@ -48,17 +47,15 @@ const ContactForm: React.FC<ContactFormProps> = ({ isWinter, content }) => {
             </p>
           </div>
 
-          {/* LOUD FORM SUBMISSION */}
+          {/* SINGLE EMAIL ACTIVATION FORM */}
           <form 
             action={`https://formsubmit.co/${targetEmail}`} 
             method="POST" 
             className="space-y-6"
           >
-            {/* Hidden Configuration Fields */}
             <input type="hidden" name="_captcha" value="false" />
             <input type="hidden" name="_subject" value="New Quote Request - ClearFast Website" />
             <input type="hidden" name="_template" value="table" />
-            {/* Remove _next so you see the activation screen explicitly */}
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
@@ -109,7 +106,6 @@ const ContactForm: React.FC<ContactFormProps> = ({ isWinter, content }) => {
               />
             </div>
 
-            {/* Optional Address (No Asterisk) */}
             <div>
               <label htmlFor="address" className={labelClass}>
                 Property Address
