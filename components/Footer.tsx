@@ -6,15 +6,12 @@ interface FooterProps {
 }
 
 const Footer: React.FC<FooterProps> = ({ isWinter }) => {
-  // Dynamic Background Colors
   const bgClass = isWinter ? "bg-slate-900" : "bg-green-950";
   const iconColor = isWinter ? "text-blue-400" : "text-green-400";
   const hoverColor = isWinter ? "hover:text-blue-300" : "hover:text-green-300";
 
   return (
     <footer className={`relative text-white py-12 font-sans border-t border-gray-800 overflow-hidden transition-colors duration-700 ${bgClass}`}>
-      
-      {/* --- BACKGROUND DECORATION --- */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         {isWinter ? (
           <>
@@ -34,45 +31,25 @@ const Footer: React.FC<FooterProps> = ({ isWinter }) => {
           </>
         )}
       </div>
-
-      {/* --- CONTENT --- */}
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
-            {/* Column 1: Brand */}
             <div>
-              <h3 className="font-display font-bold text-xl uppercase mb-6 tracking-wide text-gray-100 flex items-center gap-2">
-                Property Care
-              </h3>
-              <p className="text-gray-400 mb-6 leading-relaxed">
-                Reliable Twin-Season Property Care. We handle the toughest winter storms and the hottest summer days so you don't have to.
-              </p>
+              <h3 className="font-display font-bold text-xl uppercase mb-6 tracking-wide text-gray-100 flex items-center gap-2">Property Care</h3>
+              <p className="text-gray-400 mb-6 leading-relaxed">Reliable Twin-Season Property Care. We handle the toughest winter storms and the hottest summer days so you don't have to.</p>
               <div className="flex space-x-4">
                 <a href="#" className="text-gray-400 hover:text-white transition-colors"><Facebook size={20} /></a>
                 <a href="#" className="text-gray-400 hover:text-white transition-colors"><Instagram size={20} /></a>
                 <a href="#" className="text-gray-400 hover:text-white transition-colors"><Twitter size={20} /></a>
               </div>
             </div>
-
-            {/* Column 2: Contact */}
             <div>
               <h3 className="font-display font-bold text-xl uppercase mb-6 tracking-wide text-gray-100">Contact</h3>
               <ul className="space-y-4 text-gray-300">
-                <li className="flex items-start">
-                  <Phone className="mr-3 h-5 w-5 ${iconColor}" />
-                  <span>(555) 123-4567</span>
-                </li>
-                <li className="flex items-start">
-                  <Mail className="mr-3 h-5 w-5 ${iconColor}" />
-                  <span>hello@clearfast.ca</span>
-                </li>
-                <li className="flex items-start">
-                  <MapPin className="mr-3 h-5 w-5 ${iconColor}" />
-                  <span>Brantford, ON<br />Serving Brant & Hamilton</span>
-                </li>
+                <li className="flex items-start"><Phone className="mr-3 h-5 w-5 ${iconColor}" /><span>(555) 123-4567</span></li>
+                <li className="flex items-start"><Mail className="mr-3 h-5 w-5 ${iconColor}" /><span>hello@clearfast.ca</span></li>
+                <li className="flex items-start"><MapPin className="mr-3 h-5 w-5 ${iconColor}" /><span>Brantford, ON<br />Serving Brant & Hamilton</span></li>
               </ul>
             </div>
-
-            {/* Column 3: Services */}
             <div>
                <h3 className="font-display font-bold text-xl uppercase mb-6 tracking-wide text-gray-100">Services</h3>
                <ul className="space-y-3 text-gray-300">
@@ -84,28 +61,15 @@ const Footer: React.FC<FooterProps> = ({ isWinter }) => {
                  <li><a href="#services" className="${hoverColor} transition-colors">Aeration</a></li>
                </ul>
             </div>
-
-            {/* Column 4: Service Area */}
             <div>
               <h3 className="font-display font-bold text-xl uppercase mb-6 tracking-wide text-gray-100">Service Area</h3>
               <ul className="space-y-3 text-gray-300">
-                <li>Brantford</li>
-                <li>Brant</li>
-                <li>Kitchener</li>
-                <li>Cambridge</li>
-                <li>Hamilton</li>
-                <li>London</li>
-                <li>St. George</li>
-                <li>Paris</li>
+                <li>Brantford</li><li>Brant</li><li>Kitchener</li><li>Cambridge</li><li>Hamilton</li><li>London</li><li>St. George</li><li>Paris</li>
               </ul>
             </div>
         </div>
-
-        {/* Bottom Section */}
         <div className="border-t border-gray-800 pt-8 mt-8 flex flex-col md:flex-row justify-between items-center text-sm text-gray-500">
-          <div className="mb-4 md:mb-0 text-center md:text-left">
-            &copy; {new Date().getFullYear()} ClearFast Property Care. All rights reserved.
-          </div>
+          <div className="mb-4 md:mb-0 text-center md:text-left">&copy; {new Date().getFullYear()} ClearFast Property Care. All rights reserved.</div>
           <div className="flex space-x-8">
             <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>
             <a href="#" className="hover:text-white transition-colors">Terms of Service</a>
