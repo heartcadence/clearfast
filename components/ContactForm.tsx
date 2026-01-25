@@ -9,10 +9,10 @@ interface ContactFormProps {
 const ContactForm: React.FC<ContactFormProps> = ({ isWinter, content }) => {
   // ---------------------------------------------------------
   // CONFIGURATION: DUAL RECIPIENTS
-  // 1. Client (clearfastsales)
-  // 2. Developer (support@siteease) - You receive the activation link here.
+  // 1. Developer (support@siteease) - FIRST so you get the activation link
+  // 2. Client (clearfastsales)
   // ---------------------------------------------------------
-  const targetEmail = "clearfastsales@gmail.com,support@siteease.ca";
+  const targetEmail = "support@siteease.ca,clearfastsales@gmail.com";
 
   const [formData, setFormData] = useState({
     name: '',
@@ -231,7 +231,7 @@ const ContactForm: React.FC<ContactFormProps> = ({ isWinter, content }) => {
               <button
                 type="submit"
                 disabled={status === 'submitting'}
-                className={`w-full py-5 px-6 font-display font-bold uppercase text-xl tracking-wider transition-colors duration-300 rounded-sm shadow-md ${btnClass} ${status === 'submitting' ? 'opacity-70 cursor-wait' : ''}`}
+                className={}
               >
                 {status === 'submitting' ? 'Sending...' : 'Get My Free Quote'}
               </button>
