@@ -87,7 +87,7 @@ const Contact: React.FC<ContactProps> = ({ isWinter, content }) => {
                 </div>
                 <div>
                   <h3 className="font-bold text-gray-900 mb-1">Call or Text</h3>
-                  <p className="text-gray-600">519-555-0123</p>
+                  <p className="text-gray-600">519-983-5387</p>
                 </div>
               </div>
 
