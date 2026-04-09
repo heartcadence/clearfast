@@ -55,7 +55,7 @@ const App: React.FC = () => {
         </div>
         
         <div id="contact">
-          <ContactForm isWinter={isWinter} content={content} />
+          <ContactForm isWinter={isWinter} />
         </div>
       </main>
 

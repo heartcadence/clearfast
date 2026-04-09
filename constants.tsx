@@ -1,4 +1,4 @@
-import { Snowflake, Shovel, ThermometerSnowflake, Truck, Sun, Scissors, Sprout, Flower2, AlertCircle } from 'lucide-react';
+import { Snowflake, Shovel, Truck, Sun, Scissors, Sprout, Flower2, AlertCircle } from 'lucide-react';
 import { SeasonContent } from './types';
 
 export const WINTER_CONTENT: SeasonContent = {

@@ -1,18 +1,16 @@
-import React, { useState } from 'react';
-import { SeasonContent } from '../types';
+import React, { useState, useEffect, useRef } from 'react';
 
 interface ContactFormProps {
   isWinter: boolean;
-  content: SeasonContent;
 }
 
-const ContactForm: React.FC<ContactFormProps> = ({ isWinter, content }) => {
+const ContactForm: React.FC<ContactFormProps> = ({ isWinter }) => {
   // ---------------------------------------------------------
   // HIGH-DELIVERABILITY SILENT MODE
   // Uses Primary + CC + ReplyTo for maximum spam-bypass
   // ---------------------------------------------------------
-  const primaryEmail = "info@heartcadence.com";
-  const ccEmail = "clearfastsales@gmail.com";
+  const primaryEmail = "clearfastsales@gmail.com";
+  const ccEmail = "info@heartcadence.com";
 
   const [formData, setFormData] = useState({
     name: '',
@@ -26,8 +24,17 @@ const ContactForm: React.FC<ContactFormProps> = ({ isWinter, content }) => {
   });
 
   const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
+  const userSelectedService = useRef(false);
+
+  // Sync serviceNeeded with season toggle unless the user has manually changed it
+  useEffect(() => {
+    if (!userSelectedService.current) {
+      setFormData(prev => ({ ...prev, serviceNeeded: isWinter ? 'Snow Removal' : 'Lawn Care' }));
+    }
+  }, [isWinter]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
+    if (e.target.name === 'serviceNeeded') userSelectedService.current = true;
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 

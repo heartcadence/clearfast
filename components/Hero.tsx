@@ -13,14 +13,10 @@ const Hero: React.FC<HeroProps> = ({ isWinter, content }) => {
   const [summerImage, setSummerImage] = useState<string>('');
 
   useEffect(() => {
-    // Wait for the browser to finish critical tasks (2.5 seconds), then load Summer image
-    const timer = setTimeout(() => {
-      const img = new Image();
-      img.src = '/images/hero-summer.webp';
-      img.onload = () => setSummerImage('/images/hero-summer.webp');
-    }, 2500);
-
-    return () => clearTimeout(timer);
+    // Preload summer image in background immediately after mount
+    const img = new Image();
+    img.src = '/images/hero-summer.webp';
+    img.onload = () => setSummerImage('/images/hero-summer.webp');
   }, []);
 
   // Dark overlay (bg-black/50)

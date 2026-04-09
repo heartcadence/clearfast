@@ -1,5 +1,5 @@
 import React from 'react';
-import { Award, MapPin } from 'lucide-react';
+import { Award, MapPin, Home } from 'lucide-react';
 
 const TrustBar: React.FC = () => {
   return (
@@ -20,12 +20,23 @@ const TrustBar: React.FC = () => {
 
           {/* Badge 3 */}
           <div className="flex items-center space-x-3 group cursor-default">
-            <MapPin 
-              className="text-gray-600 w-8 h-8 md:w-6 md:h-6 transition-all duration-300 ease-in-out group-hover:scale-110 group-hover:text-gray-800 group-hover:drop-shadow-[0_0_4px_rgba(251,191,36,0.8)]" 
-              strokeWidth={1.5} 
+            <MapPin
+              className="text-gray-600 w-8 h-8 md:w-6 md:h-6 transition-all duration-300 ease-in-out group-hover:scale-110 group-hover:text-gray-800 group-hover:drop-shadow-[0_0_4px_rgba(251,191,36,0.8)]"
+              strokeWidth={1.5}
             />
             <span className="font-sans font-bold text-sm text-gray-700 uppercase tracking-widest transition-colors duration-300 group-hover:text-gray-900">
               Locally Owned & Operated
+            </span>
+          </div>
+
+          {/* Badge 4 */}
+          <div className="flex items-center space-x-3 group cursor-default">
+            <Home
+              className="text-gray-600 w-8 h-8 md:w-6 md:h-6 transition-all duration-300 ease-in-out group-hover:scale-110 group-hover:text-gray-800 group-hover:drop-shadow-[0_0_4px_rgba(251,191,36,0.8)]"
+              strokeWidth={1.5}
+            />
+            <span className="font-sans font-bold text-sm text-gray-700 uppercase tracking-widest transition-colors duration-300 group-hover:text-gray-900">
+              500+ Properties Served
             </span>
           </div>
 

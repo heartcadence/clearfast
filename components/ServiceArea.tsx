@@ -53,11 +53,7 @@ const ServiceArea: React.FC<ServiceAreaProps> = ({ isWinter }) => {
 
           {/* Right Column: Map Visual */}
           <div className="relative h-[400px] w-full rounded-2xl overflow-hidden shadow-2xl border-4 border-white group">
-            {/* 
-              TODO: Replace the src below with a screenshot of your actual Google Maps zone. 
-              Go to My Maps, draw your polygon, screenshot it, and upload.
-            */}
-            <img 
+            <img
               src="/images/brantford-service-map.webp" 
               alt="Map of ClearFast Service Area in Brantford" 
               className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"

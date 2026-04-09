@@ -1,5 +1,5 @@
 import React from 'react';
-import { Phone, Mail, MapPin, Facebook, Instagram, Twitter, Snowflake, Leaf } from 'lucide-react';
+import { Phone, Mail, MapPin, Snowflake, Leaf } from 'lucide-react';
 
 interface FooterProps {
   isWinter: boolean;
@@ -36,29 +36,24 @@ const Footer: React.FC<FooterProps> = ({ isWinter }) => {
             <div>
               <h3 className="font-display font-bold text-xl uppercase mb-6 tracking-wide text-gray-100 flex items-center gap-2">Property Care</h3>
               <p className="text-gray-400 mb-6 leading-relaxed">Reliable Twin-Season Property Care. We handle the toughest winter storms and the hottest summer days so you don't have to.</p>
-              <div className="flex space-x-4">
-                <a href="#" className="text-gray-400 hover:text-white transition-colors"><Facebook size={20} /></a>
-                <a href="#" className="text-gray-400 hover:text-white transition-colors"><Instagram size={20} /></a>
-                <a href="#" className="text-gray-400 hover:text-white transition-colors"><Twitter size={20} /></a>
-              </div>
             </div>
             <div>
               <h3 className="font-display font-bold text-xl uppercase mb-6 tracking-wide text-gray-100">Contact</h3>
               <ul className="space-y-4 text-gray-300">
-                <li className="flex items-start"><Phone className="mr-3 h-5 w-5 ${iconColor}" /><span>(519) 983-5387</span></li>
-                <li className="flex items-start"><Mail className="mr-3 h-5 w-5 ${iconColor}" /><span>sales@clearfast.ca</span></li>
-                <li className="flex items-start"><MapPin className="mr-3 h-5 w-5 ${iconColor}" /><span>Brantford, ON<br />Serving Brant & Hamilton</span></li>
+                <li className="flex items-start"><Phone className={`mr-3 h-5 w-5 flex-shrink-0 ${iconColor}`} /><a href="tel:+15199835387" className="hover:text-white transition-colors">(519) 983-5387</a></li>
+                <li className="flex items-start"><Mail className={`mr-3 h-5 w-5 flex-shrink-0 ${iconColor}`} /><a href="mailto:sales@clearfast.ca" className="hover:text-white transition-colors">sales@clearfast.ca</a></li>
+                <li className="flex items-start"><MapPin className={`mr-3 h-5 w-5 flex-shrink-0 ${iconColor}`} /><span>Brantford, ON<br />Serving Brant & Hamilton</span></li>
               </ul>
             </div>
             <div>
                <h3 className="font-display font-bold text-xl uppercase mb-6 tracking-wide text-gray-100">Services</h3>
                <ul className="space-y-3 text-gray-300">
-                 <li><a href="#services" className="${hoverColor} transition-colors">Snow Plowing</a></li>
-                 <li><a href="#services" className="${hoverColor} transition-colors">Salting & De-icing</a></li>
-                 <li><a href="#services" className="${hoverColor} transition-colors">Lawn Mowing</a></li>
-                 <li><a href="#services" className="${hoverColor} transition-colors">Fertilization</a></li>
-                 <li><a href="#services" className="${hoverColor} transition-colors">Spring Cleanup</a></li>
-                 <li><a href="#services" className="${hoverColor} transition-colors">Aeration</a></li>
+                 <li><a href="#services" className={`${hoverColor} transition-colors`}>Snow Plowing</a></li>
+                 <li><a href="#services" className={`${hoverColor} transition-colors`}>Salting & De-icing</a></li>
+                 <li><a href="#services" className={`${hoverColor} transition-colors`}>Lawn Mowing</a></li>
+                 <li><a href="#services" className={`${hoverColor} transition-colors`}>Fertilization</a></li>
+                 <li><a href="#services" className={`${hoverColor} transition-colors`}>Spring Cleanup</a></li>
+                 <li><a href="#services" className={`${hoverColor} transition-colors`}>Aeration</a></li>
                </ul>
             </div>
             <div>
@@ -68,13 +63,8 @@ const Footer: React.FC<FooterProps> = ({ isWinter }) => {
               </ul>
             </div>
         </div>
-        <div className="border-t border-gray-800 pt-8 mt-8 flex flex-col md:flex-row justify-between items-center text-sm text-gray-500">
-          <div className="mb-4 md:mb-0 text-center md:text-left">&copy; {new Date().getFullYear()} ClearFast Property Care. All rights reserved.</div>
-          <div className="flex space-x-8">
-            <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>
-            <a href="#" className="hover:text-white transition-colors">Terms of Service</a>
-            <a href="#" className="hover:text-white transition-colors">Sitemap</a>
-          </div>
+        <div className="border-t border-gray-800 pt-8 mt-8 flex justify-center items-center text-sm text-gray-500">
+          <div className="text-center">&copy; {new Date().getFullYear()} ClearFast Property Care. All rights reserved.</div>
         </div>
       </div>
     </footer>

@@ -23,7 +23,7 @@ const HowItWorks: React.FC<HowItWorksProps> = ({ isWinter, content }) => {
     },
     {
       icon: Smile,
-      title: "BASK IN THE SPLENDOR",
+      title: isWinter ? "ENJOY THE RESULTS" : "BASK IN THE SPLENDOR",
       description: content.howItWorksStep3
     }
   ];
